@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ramadan Daily Activities Checklist</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background: #f4f6f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .container {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      max-width: 600px;
+      width: 100%;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.8em;
+      color: #333;
+    }
+    .clear-btn {
+      display: block;
+      margin: 0 auto 20px auto;
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      background-color: #dc3545;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .clear-btn:hover {
+      background-color: #c82333;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #eee;
+    }
+    li:last-child {
+      border-bottom: none;
+    }
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: #007BFF;
+      margin-right: 15px;
+    }
+    label {
+      flex: 1;
+      font-size: 1em;
+      color: #555;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 10px;
+      }
+      .container {
+        padding: 15px;
+      }
+      li {
+        padding: 8px;
+      }
+      .clear-btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Ramadan Daily Activities Checklist</h1>
+    <button class="clear-btn" id="clearButton">Clear All</button>
+    <ul id="checklist">
+      <li>
+        <input type="checkbox" id="task1">
+        <label for="task1">Prayed all Farḍ ṣalāh on time</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task2">
+        <label for="task2">Prayed the 12 Sunnah prayers</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task3">
+        <label for="task3">Prayed Tarawīh ṣalāh</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task4">
+        <label for="task4">Prayed a minimum of 2 rak’āt of Night prayers</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task5">
+        <label for="task5">Prayed the Witr ṣalāh</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task6">
+        <label for="task6">Read Adkhār after every ṣalāh</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task7">
+        <label for="task7">Read morning Adkhār</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task8">
+        <label for="task8">Read evening Adkhār</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task9">
+        <label for="task9">Read Tafsīr for a portion of the Qur’ān</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task10">
+        <label for="task10">Read one Ḥadīth and its meaning</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task11">
+        <label for="task11">Read at least 1 Juz of the Qur’ān</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task12">
+        <label for="task12">Read Sūrah al-Mulk before going to sleep</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task13">
+        <label for="task13">Did something to please my parents</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task14">
+        <label for="task14">Did not argue</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task15">
+        <label for="task15">Did not backbite</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task16">
+        <label for="task16">Gave Ṣadaqah to a charitable cause</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task17">
+        <label for="task17">Removed a harmful object from the road</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task18">
+        <label for="task18">Did a good deed in secret</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task19">
+        <label for="task19">Went to sleep in a state of Wuḍū’</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task20">
+        <label for="task20">Went to sleep without any ill feelings towards a Muslim</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task21">
+        <label for="task21">Send Salah &amp; Salam upon the Prophet</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task22">
+        <label for="task22">Made Du’ā’ for my parents</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task23">
+        <label for="task23">Asked Allāh for forgiveness</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task24">
+        <label for="task24">Reflected over the Hereafter</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task25">
+        <label for="task25">Reflected over Allāh’s greatness &amp; perfection</label>
+      </li>
+      <li>
+        <input type="checkbox" id="task26">
+        <label for="task26">Reflected over my relationship with Allāh</label>
+      </li>
+    </ul>
+  </div>
+  <script>
+    const tasks = [
+      'task1','task2','task3','task4','task5','task6','task7','task8','task9',
+      'task10','task11','task12','task13','task14','task15','task16','task17',
+      'task18','task19','task20','task21','task22','task23','task24','task25','task26'
+    ];
+
+    // Load saved state from localStorage for each task
+    function loadState() {
+      tasks.forEach(taskId => {
+        const checkbox = document.getElementById(taskId);
+        if (localStorage.getItem(taskId) === 'true') {
+          checkbox.checked = true;
+        }
+      });
+    }
+
+    // Save state when a checkbox changes
+    tasks.forEach(taskId => {
+      const checkbox = document.getElementById(taskId);
+      checkbox.addEventListener('change', function() {
+        localStorage.setItem(taskId, this.checked);
+      });
+    });
+
+    // Clear all checkboxes and remove their saved state
+    function clearAll() {
+      tasks.forEach(taskId => {
+        document.getElementById(taskId).checked = false;
+        localStorage.removeItem(taskId);
+      });
+    }
+
+    // Set up the clear all button event listener
+    document.getElementById('clearButton').addEventListener('click', clearAll);
+
+    window.addEventListener('load', loadState);
+  </script>
+</body>
+</html>
