@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ramadan Daily Activities Checklist</title>
+  <title>Ramadan Activities Checklist</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    * { box-sizing: border-box; }
     body {
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -18,16 +19,41 @@
     }
     .container {
       background: #fff;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       padding: 20px;
-      max-width: 600px;
       width: 100%;
+      max-width: 600px;
     }
     h1 {
       text-align: center;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       font-size: 1.8em;
+      color: #333;
+    }
+    .day-navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .nav-btn {
+      background: #007BFF;
+      color: #fff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1.2em;
+      margin: 0 15px;
+      transition: background 0.3s ease;
+    }
+    .nav-btn:hover {
+      background: #0056b3;
+    }
+    #currentDayDisplay {
+      font-size: 1.2em;
+      font-weight: 500;
       color: #333;
     }
     .clear-btn {
@@ -40,7 +66,7 @@
       color: #fff;
       border-radius: 5px;
       cursor: pointer;
-      transition: background-color 0.3s;
+      transition: background-color 0.3s ease;
     }
     .clear-btn:hover {
       background-color: #c82333;
@@ -53,7 +79,7 @@
     li {
       display: flex;
       align-items: center;
-      padding: 10px;
+      padding: 12px 10px;
       border-bottom: 1px solid #eee;
     }
     li:last-child {
@@ -62,8 +88,8 @@
     input[type="checkbox"] {
       width: 20px;
       height: 20px;
-      accent-color: #007BFF;
       margin-right: 15px;
+      accent-color: #007BFF;
     }
     label {
       flex: 1;
@@ -71,24 +97,22 @@
       color: #555;
     }
     @media (max-width: 600px) {
-      body {
-        padding: 10px;
-      }
-      .container {
-        padding: 15px;
-      }
-      li {
-        padding: 8px;
-      }
-      .clear-btn {
-        width: 100%;
-      }
+      body { padding: 10px; }
+      .container { padding: 15px; }
+      li { padding: 10px 8px; }
+      .nav-btn { padding: 8px 12px; font-size: 1em; margin: 0 10px; }
+      #currentDayDisplay { font-size: 1em; }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ramadan Daily Activities Checklist</h1>
+    <h1>Ramadan Activities Checklist</h1>
+    <div class="day-navigation">
+      <button id="prevDay" class="nav-btn">&larr;</button>
+      <span id="currentDayDisplay">Day 1</span>
+      <button id="nextDay" class="nav-btn">&rarr;</button>
+    </div>
     <button class="clear-btn" id="clearButton">Clear All</button>
     <ul id="checklist">
       <li>
@@ -204,36 +228,80 @@
       'task18','task19','task20','task21','task22','task23','task24','task25','task26'
     ];
 
-    // Load saved state from localStorage for each task
-    function loadState() {
+    let currentDay = 1;
+    const ramadanStart = new Date("2025-03-01");
+    const today = new Date();
+    const diffDays = Math.floor((today - ramadanStart) / (1000 * 60 * 60 * 24)) + 1;
+    if(diffDays >= 1 && diffDays <= 30) {
+      currentDay = diffDays;
+    }
+
+    function updateDayDisplay() {
+      document.getElementById("currentDayDisplay").textContent = "Day " + currentDay;
+    }
+
+    function loadStateForDay(day) {
+      const saved = localStorage.getItem("day_" + day);
+      let state = {};
+      if (saved) {
+        try {
+          state = JSON.parse(saved);
+        } catch(e) {
+          state = {};
+        }
+      }
       tasks.forEach(taskId => {
         const checkbox = document.getElementById(taskId);
-        if (localStorage.getItem(taskId) === 'true') {
-          checkbox.checked = true;
-        }
+        checkbox.checked = state[taskId] || false;
       });
     }
 
-    // Save state when a checkbox changes
-    tasks.forEach(taskId => {
-      const checkbox = document.getElementById(taskId);
-      checkbox.addEventListener('change', function() {
-        localStorage.setItem(taskId, this.checked);
+    function saveStateForDay(day) {
+      let state = {};
+      tasks.forEach(taskId => {
+        const checkbox = document.getElementById(taskId);
+        state[taskId] = checkbox.checked;
       });
-    });
+      localStorage.setItem("day_" + day, JSON.stringify(state));
+    }
 
-    // Clear all checkboxes and remove their saved state
     function clearAll() {
       tasks.forEach(taskId => {
         document.getElementById(taskId).checked = false;
-        localStorage.removeItem(taskId);
       });
+      localStorage.removeItem("day_" + currentDay);
     }
 
-    // Set up the clear all button event listener
-    document.getElementById('clearButton').addEventListener('click', clearAll);
+    function goToDay(newDay) {
+      saveStateForDay(currentDay);
+      currentDay = newDay;
+      updateDayDisplay();
+      loadStateForDay(currentDay);
+    }
 
-    window.addEventListener('load', loadState);
+    document.getElementById("prevDay").addEventListener('click', function() {
+      if (currentDay > 1) {
+        goToDay(currentDay - 1);
+      }
+    });
+    document.getElementById("nextDay").addEventListener('click', function() {
+      if (currentDay < 30) {
+        goToDay(currentDay + 1);
+      }
+    });
+
+    tasks.forEach(taskId => {
+      document.getElementById(taskId).addEventListener('change', function() {
+        saveStateForDay(currentDay);
+      });
+    });
+
+    document.getElementById("clearButton").addEventListener('click', clearAll);
+
+    window.addEventListener('load', function() {
+      updateDayDisplay();
+      loadStateForDay(currentDay);
+    });
   </script>
 </body>
 </html>
