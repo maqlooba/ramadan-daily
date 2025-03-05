@@ -103,11 +103,47 @@
       .nav-btn { padding: 8px 12px; font-size: 1em; margin: 0 10px; }
       #currentDayDisplay { font-size: 1em; }
     }
+    /* Dark mode styling */
+    @media (prefers-color-scheme: dark) {
+      body {
+        background: #121212;
+      }
+      .container {
+        background: #1e1e1e;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      }
+      h1, #currentDayDisplay {
+        color: #e0e0e0;
+      }
+      .nav-btn {
+        background: #0d6efd;
+        color: #fff;
+      }
+      .nav-btn:hover {
+        background: #0a58ca;
+      }
+      .clear-btn {
+        background-color: #f44336;
+        color: #fff;
+      }
+      .clear-btn:hover {
+        background-color: #d32f2f;
+      }
+      li {
+        border-bottom: 1px solid #333;
+      }
+      label {
+        color: #ccc;
+      }
+      input[type="checkbox"] {
+        accent-color: #0d6efd;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Ramadan Activities Checklist</h1>
+    <h1>🕌 Ramadan Activities Checklist 🌙</h1>
     <div class="day-navigation">
       <button id="prevDay" class="nav-btn">&larr;</button>
       <span id="currentDayDisplay">Day 1</span>
